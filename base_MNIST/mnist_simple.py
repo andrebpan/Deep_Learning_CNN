@@ -34,9 +34,19 @@ y_teste = np_utils.to_categorical(y_teste, 10)
 rede_neural = Sequential()
 rede_neural.add(InputLayer(shape = (28, 28, 1)))#28 pixels de altura e largura e 1 canal(imagem em escala de cinza)
 rede_neural.add(Conv2D(filters= 32, kernel_size=(3,3), activation='relu'))#camadas de convolução(32), kernel_size(tamanho do detector de caracteristicas)
+rede_neural.add(BatchNormalization())
 rede_neural.add(MaxPooling2D(pool_size=(2,2)))
+
+rede_neural.add(Conv2D(filters= 32, kernel_size=(3,3), activation='relu'))#camadas de convolução(32), kernel_size(tamanho do detector de caracteristicas)
+rede_neural.add(BatchNormalization())
+rede_neural.add(MaxPooling2D(pool_size=(2,2)))
+
 rede_neural.add(Flatten())
+
 rede_neural.add(Dense(units=128, activation='relu'))#camada oculta
+rede_neural.add(Dropout(0.2))
+rede_neural.add(Dense(units=128, activation='relu'))#camada oculta
+rede_neural.add(Dropout(0.2))
 rede_neural.add(Dense(units=10, activation='softmax'))#camada de saida
 
 #visualizando as etapas de convolução
